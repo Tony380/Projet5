@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS Product(
     brand VARCHAR (100) NOT NULL,
     nutriscore CHAR(1) NOT NULL,
     store VARCHAR(150),
-    cat_id INT UNSIGNED DEFAULT NULL,
+    cat_id SMALLINT UNSIGNED DEFAULT NULL,
     url VARCHAR (150) NOT NULL,
     favorite SMALLINT (1),
     CONSTRAINT fk_cat_id FOREIGN KEY (cat_id) REFERENCES Category(id) ON DELETE SET NULL);

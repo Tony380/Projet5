@@ -1,5 +1,3 @@
-DROP DATABASE IF EXISTS Purbeurre;
-
 CREATE DATABASE Purbeurre;
 
 USE Purbeurre;

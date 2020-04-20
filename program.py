@@ -17,6 +17,7 @@ class Program:
         self.prod_list = []
         self.fav_list = {}
 
+
     def fill_db(self):
         categories = ["Muffins", "Steaks", "Biscuits", "Tortellini", "Viennoiseries", "Taboulés", "Confitures",
                       "Cassoulets", "Yaourts", "Sodas"]
@@ -45,15 +46,18 @@ class Program:
                             self.cursor.execute(operation, product)
                             self.my_db.commit()
 
+
     def disconnect(self):
         self.cursor = self.cursor.close()
         self.my_db = self.my_db.close()
         quit()
 
+
     def display_categories(self):
         self.cursor.execute("SELECT * FROM Category ORDER BY id")
         for i in self.cursor.fetchall():
             print(i[0], "-", i[1])
+
 
     def display_products(self):
         self.prod_list.clear()
@@ -62,6 +66,7 @@ class Program:
             print(result[0], "-", result[1])
             self.prod_list.append(result[0])
 
+
     def display_product(self):
         self.cursor.execute("SELECT name, brand, nutriscore, store, url"
                             " FROM Product WHERE id ={}".format(self.prod_id))
@@ -69,6 +74,7 @@ class Program:
             print("Product name :", i[0] + "\n" + "Brand :", i[1] + "\n" + "Nutriscore :", i[2].upper() + "\n" +
                   "Stores :", i[3] + "\n" + "Link to OpenFoodFacts :", i[4])
             self.url = i[4]
+
 
     def display_substitute(self):
         self.cursor.execute("SELECT name, brand, nutriscore, store, url"
@@ -79,6 +85,7 @@ class Program:
             print("Product name :", i[0] + "\n" + "Brand :", i[1] + "\n" + "Nutriscore :", i[2].upper() + "\n" +
                   "Stores :", i[3] + "\n" + "Link to OpenFoodFacts :", i[4])
             self.url = i[4]
+
 
     def save_favorite(self):
         self.cursor.execute("UPDATE Product SET favorite=1 WHERE url='{}'".format(self.url))
@@ -94,10 +101,12 @@ class Program:
         for i in self.cursor.fetchall():
             print(i[0], "-", i[1])
 
+
     def erase_product(self):
         self.cursor.execute("UPDATE Product SET favorite=NULL WHERE id='{}'".format(self.prod_id))
         self.my_db.commit()
         self.fav_list.pop(self.prod_id)
+
 
     def is_favorite(self):
         self.my_db.commit()

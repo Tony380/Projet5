@@ -88,7 +88,11 @@ while True:
                         if len(main.fav_list) == 0:
                             print("You have no favorite products")
                         elif len(main.fav_list) > 0:
-                            main.display_favorite()
+                            while True:
+                                main.display_favorite()
+                                main.prod_id = int(input("\nCheck a product : "))
+                                main.display_product()
+                                break
                     elif choice == 2:
                         if len(main.fav_list) == 0:
                             print("You have no favorite products")

@@ -16,5 +16,3 @@ CREATE TABLE IF NOT EXISTS Product(
     url VARCHAR (300) NOT NULL,
     favorite SMALLINT UNSIGNED,
     CONSTRAINT fk_cat_id FOREIGN KEY (cat_id) REFERENCES Category(id) ON DELETE SET NULL);
-
-

@@ -5,14 +5,19 @@ import config
 
 class Program:
     def __init__(self):
-        self.my_db = mysql.connector.connect(host=config.host, database=config.database,
-                                             user=config.user, password=config.password)
+        self.my_db = mysql.connector.connect(host=config.host, user=config.user, password=config.password)
         self.cursor = self.my_db.cursor()
         self.cat_id = int
         self.prod_id = int
         self.id = int
         self.prod_list = []
         self.fav_list = {}
+
+
+    def db_creation(self):
+        for line in open("database.sql").read().split(';\n'):
+            self.cursor.execute(line)
+
 
     def db_fill(self):
         categories = ["Muffins", "Steaks", "Biscuits", "Tortellini", "Viennoiseries", "Taboulés", "Confitures",
@@ -26,7 +31,7 @@ class Program:
                     cat_id += 1
                     self.cursor.execute("INSERT INTO Category (name) VALUES ('{}')".format(element))
                     payload = {"search_terms": "{}".format(element),
-                               "page_size": 200,
+                               "page_size": 50,
                                "json": 1}
                     res = requests.get("https://fr.openfoodfacts.org/cgi/search.pl?", params=payload)
                     result = res.json()
@@ -41,6 +46,7 @@ class Program:
                                         " VALUES (%s, %s, %s, %s, %s, %s) "
                             self.cursor.execute(operation, product)
                             self.my_db.commit()
+
 
     def disconnect(self):
         self.cursor = self.cursor.close()

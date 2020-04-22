@@ -3,6 +3,8 @@ from program import Program
 
 def main():
     program = Program()
+    program.db_creation()
+    program.db_fill()
     while True:
         try:
             print("\n---MAIN MENU---\n"

@@ -18,6 +18,6 @@ CREATE TABLE IF NOT EXISTS Product(
 
 CREATE TABLE IF NOT EXISTS Substitute(
     sub_id INT UNSIGNED NOT NULL,
-    prod_id INT UNSIGNED NOT NULL,
+    prod_id INT UNSIGNED UNIQUE NOT NULL,
     CONSTRAINT fk_sub_id FOREIGN KEY (sub_id) REFERENCES Product(id),
     CONSTRAINT fk_prod_id FOREIGN KEY (prod_id) REFERENCES Product(id));

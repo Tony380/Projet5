@@ -86,8 +86,8 @@ class Program:
 
     def display_substitute(self):
         """Display the choosen product's substitute"""
-        self.cursor.execute("SELECT name, brand, nutriscore, store, url, id FROM Product WHERE cat_id ={} "
-                            "ORDER BY nutriscore LIMIT 1".format(self.cat_id))
+        self.cursor.execute("SELECT name, brand, MIN(nutriscore), store, url, id FROM Product "
+                            "WHERE cat_id ={}".format(self.cat_id))
         for i in self.cursor.fetchall():
             print("Product name :", i[0] + "\n" + "Brand :", i[1] + "\n" + "Nutriscore :", i[2].upper() + "\n" +
                   "Stores :", i[3] + "\n" + "Link to OpenFoodFacts :", i[4])
@@ -96,11 +96,13 @@ class Program:
 
     def save_substitute(self):
         """Save the substitute's id and the choosen product's id in the database"""
-        self.cursor.execute("INSERT INTO Substitute (sub_id, prod_id) VALUES ({}, {})".format(self.id, self.prod_id))
+        self.cursor.execute("INSERT IGNORE INTO Substitute (sub_id, prod_id) "
+                            "VALUES ({}, {})".format(self.id, self.prod_id))
         self.my_db.commit()
         self.cursor.execute("SELECT sub_id, prod_id FROM Substitute")
         for i in self.cursor.fetchall():
-            self.fav_list[i[0]] = "{}".format(i[1])
+            if i[0] not in self.fav_list:
+                self.fav_list[i[0]] = "{}".format(i[1])
 
 
     def display_saved(self):
@@ -117,7 +119,7 @@ class Program:
 
 
     def is_saved(self):
-        """Check if there are some saved products in the database"""
+        """Check if there are some saved products in the database and put them in a list"""
         self.my_db.commit()
         self.cursor.execute("SELECT * FROM Substitute")
         for i in self.cursor.fetchall():

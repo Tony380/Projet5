@@ -1,15 +1,12 @@
 import mysql.connector
 import requests
+import config
 
 
 class Program:
     def __init__(self):
-        self.host = "localhost"
-        self.user = "root"
-        self.password = "root"
-        self.database = "purbeurre"
-        self.my_db = mysql.connector.connect(host=self.host, database=self.database,
-                                             user=self.user, password=self.password)
+        self.my_db = mysql.connector.connect(host=config.host, database=config.database,
+                                             user=config.user, password=config.password)
         self.cursor = self.my_db.cursor()
         self.cat_id = int
         self.prod_id = int

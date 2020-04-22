@@ -8,7 +8,7 @@ def main():
             print("\n---MAIN MENU---\n"
                   "1 - Which product would you like to replace?\n"
                   "2 - Check my substitute products\n"
-                  "0 - Quit")
+                  "0 - Quit the program")
             choice = int(input("\nEnter your choice : "))
 
             if choice == 1:
@@ -41,7 +41,7 @@ def main():
                         program.display_substitute()
                         print("\n1 - Save this substitute\n"
                               "2 - Main menu\n"
-                              "0 - Quit\n")
+                              "0 - Quit the program\n")
                         choice = int(input("Enter your choice : "))
                         if choice == 1:
                             program.save_substitute()

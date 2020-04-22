@@ -1,4 +1,5 @@
 import mysql.connector
+import requests
 
 
 class Program:
@@ -16,7 +17,33 @@ class Program:
         self.prod_list = []
         self.fav_list = {}
 
+    def db_fill(self):
+        categories = ["Muffins", "Steaks", "Biscuits", "Tortellini", "Viennoiseries", "Taboulés", "Confitures",
+                      "Cassoulets", "Yaourts", "Sodas"]
 
+        self.cursor.execute("SELECT COUNT(id) FROM Category")
+        cat_id = 0
+        for answer in self.cursor:
+            if answer[0] < len(categories):
+                for element in categories:
+                    cat_id += 1
+                    self.cursor.execute("INSERT INTO Category (name) VALUES ('{}')".format(element))
+                    payload = {"search_terms": "{}".format(element),
+                               "page_size": 200,
+                               "json": 1}
+                    res = requests.get("https://fr.openfoodfacts.org/cgi/search.pl?", params=payload)
+                    result = res.json()
+                    products = result["products"]
+                    self.my_db.commit()
+                    for i in products:
+                        if i.get("product_name", False) and i.get("brands", False) and \
+                                i.get("nutrition_grades", False) and i.get("stores", False):
+                            product = (i['product_name'], i['brands'], i['nutrition_grades'],
+                                       i['stores'], cat_id, i['url'])
+                            operation = "INSERT INTO Product (name, brand, nutriscore, store, cat_id, url)" \
+                                        " VALUES (%s, %s, %s, %s, %s, %s) "
+                            self.cursor.execute(operation, product)
+                            self.my_db.commit()
 
     def disconnect(self):
         self.cursor = self.cursor.close()

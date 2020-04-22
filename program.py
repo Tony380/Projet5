@@ -1,9 +1,11 @@
+"""This file contains the Program class and its methods"""
 import mysql.connector
 import requests
 import config
 
 
 class Program:
+    """Class Program directly connects to the database"""
     def __init__(self):
         self.my_db = mysql.connector.connect(host=config.host, user=config.user, password=config.password)
         self.cursor = self.my_db.cursor()
@@ -15,11 +17,13 @@ class Program:
 
 
     def db_creation(self):
+        """Create the database"""
         for line in open("database.sql").read().split(';\n'):
             self.cursor.execute(line)
 
 
     def db_fill(self):
+        """Fill the database from OpenFoodFacts"""
         categories = ["Muffins", "Steaks", "Biscuits", "Tortellini", "Viennoiseries", "Taboulés", "Confitures",
                       "Cassoulets", "Yaourts", "Sodas"]
 
@@ -49,18 +53,21 @@ class Program:
 
 
     def disconnect(self):
+        """Disconnection from the database"""
         self.cursor = self.cursor.close()
         self.my_db = self.my_db.close()
         quit()
 
 
     def display_categories(self):
+        """Display the list of categories"""
         self.cursor.execute("SELECT * FROM Category ORDER BY id")
         for i in self.cursor.fetchall():
             print(i[0], "-", i[1])
 
 
     def display_products(self):
+        """Display the list of products"""
         self.prod_list.clear()
         self.cursor.execute("SELECT id, name FROM Product WHERE cat_id ='{}'".format(self.cat_id))
         for result in self.cursor.fetchall():
@@ -69,6 +76,7 @@ class Program:
 
 
     def display_product(self):
+        """Display the choosen product"""
         self.cursor.execute("SELECT name, brand, nutriscore, store, url"
                             " FROM Product WHERE id ={}".format(self.prod_id))
         for i in self.cursor.fetchall():
@@ -77,6 +85,7 @@ class Program:
 
 
     def display_substitute(self):
+        """Display the choosen product's substitute"""
         self.cursor.execute("SELECT name, brand, nutriscore, store, url, id FROM Product WHERE cat_id ={} "
                             "ORDER BY nutriscore LIMIT 1".format(self.cat_id))
         for i in self.cursor.fetchall():
@@ -86,6 +95,7 @@ class Program:
 
 
     def save_substitute(self):
+        """Save the substitute's id and the choosen product's id in the database"""
         self.cursor.execute("INSERT INTO Substitute (sub_id, prod_id) VALUES ({}, {})".format(self.id, self.prod_id))
         self.my_db.commit()
         self.cursor.execute("SELECT sub_id, prod_id FROM Substitute")
@@ -94,7 +104,7 @@ class Program:
 
 
     def display_saved(self):
-        self.my_db.commit()
+        """Display substitute and choosen product"""
         self.cursor.execute("SELECT Product1.name, Product1.url, Product2.name, Product2.url FROM SUBSTITUTE "
                             "INNER JOIN Product AS Product1 ON Substitute.sub_id = Product1.id "
                             "INNER JOIN Product AS Product2 ON Substitute.prod_id = Product2.id")
@@ -107,6 +117,7 @@ class Program:
 
 
     def is_saved(self):
+        """Check if there are some saved products in the database"""
         self.my_db.commit()
         self.cursor.execute("SELECT * FROM Substitute")
         for i in self.cursor.fetchall():

@@ -1,3 +1,4 @@
+"""This is the main program file"""
 from program import Program
 
 

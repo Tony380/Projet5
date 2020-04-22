@@ -16,6 +16,11 @@ This program use the **OpenFoodFacts API** to find a healthier substitute to a p
 * I want to be able to access my products and their substitutes.
 * I want to be able to leave the program.
 
+### Installation:
+Before using this program :
+* Check requirements.txt and install the packages needed if it isn't already done.
+* Fill config.py if your data are not the same.
+
 ### Main menu
 The main menu has three options:
 
@@ -23,7 +28,7 @@ The main menu has three options:
 
 2 - Check my substitute products
 
-0 - Quit the program.
+0 - Quit the program
 
 ### Menu 1 - Which product would you like to replace?
 A list of categories is displayed on the screen.
@@ -43,5 +48,8 @@ Saved products and their substitutes, are displayed on the screen.
 
 ### Menu 0 - Quit the program
 You can quit the program.
+
+### Information of interest
+The database's name created in this program is **'Purbeurre'**.
 
 

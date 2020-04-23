@@ -41,7 +41,6 @@ class Program:
                     res = requests.get("https://fr.openfoodfacts.org/cgi/search.pl?", params=payload)
                     result = res.json()
                     products = result["products"]
-                    self.my_db.commit()
                     for i in products:
                         if i.get("product_name", False) and i.get("brands", False) and \
                                 i.get("nutrition_grades", False) and i.get("stores", False):

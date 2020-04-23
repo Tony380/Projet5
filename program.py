@@ -57,6 +57,7 @@ class Program:
         """Disconnection from the database"""
         self.cursor = self.cursor.close()
         self.my_db = self.my_db.close()
+        print("\nGOOD BYE !")
         quit()
 
 
@@ -81,23 +82,28 @@ class Program:
         self.cursor.execute("SELECT name, brand, nutriscore, store, url"
                             " FROM Product WHERE id ={}".format(self.prod_id))
         for i in self.cursor.fetchall():
-            print("\nProduct name :", i[0] + "\n" + "Brand :", i[1] + "\n" + "Nutriscore :", i[2].upper() + "\n" +
+            print("--------------------------------")
+            print("Product name :", i[0] + "\n" + "Brand :", i[1] + "\n" + "Nutriscore :", i[2].upper() + "\n" +
                   "Stores :", i[3] + "\n" + "Link to OpenFoodFacts :", i[4])
             self.score = i[2]
+            self.id = self.prod_id
 
 
     def display_substitute(self):
         """Display the chosen product's substitute"""
-        self.cursor.execute("SELECT name, brand, nutriscore, store, url, id FROM Product "
-                            "WHERE cat_id ={} ORDER BY nutriscore LIMIT 1".format(self.cat_id))
+        self.cursor.execute("SELECT name, brand, nutriscore, store, url, id FROM Product WHERE cat_id = {} AND "
+                            "nutriscore = (SELECT MIN(nutriscore) FROM Product WHERE cat_id = {}) "
+                            "ORDER BY RAND() LIMIT 1".format(self.cat_id, self.cat_id))
         for i in self.cursor.fetchall():
             if i[2] != self.score:
-                print("\nCheck below for a healthier product :\n"
+                print("\nThe following product is healthier :\n"
                       "\nProduct name :", i[0] + "\n" + "Brand :", i[1] + "\n" + "Nutriscore :", i[2].upper() + "\n" +
                       "Stores :", i[3] + "\n" + "Link to OpenFoodFacts :", i[4])
+                print("--------------------------------")
                 self.id = i[5]
             else:
-                print("\nThere is no better alternative")
+                print("\nThere is no healthier alternative\n"
+                      "--------------------------------")
 
 
     def save_substitute(self):
@@ -117,15 +123,23 @@ class Program:
                             "INNER JOIN Product AS Product1 ON Substitute.sub_id = Product1.id "
                             "INNER JOIN Product AS Product2 ON Substitute.prod_id = Product2.id")
         for i in self.cursor.fetchall():
-            print("Product name : {}".format(i[0]), "\n"
-                  "Link to OpenFoodFacts :", i[1], "\n"
-                  "Substitutes this product :\n"
-                  "Product name : {}".format(i[2]), "\n"
-                  "Link to OpenFoodFacts :", i[3], "\n")
+            if i[1] == i[3]:
+                print("\nProduct name : {}".format(i[0]), "\n"
+                      "Link to OpenFoodFacts :", i[1], "\n"
+                      "There is no healthier alternative\n"
+                      "--------------------------------")
+            else:
+                print("\nProduct name : {}".format(i[0]), "\n"
+                      "Link to OpenFoodFacts :", i[1], "\n"
+                      "Substitutes this product :\n"
+                      "Product name : {}".format(i[2]), "\n"
+                      "Link to OpenFoodFacts :", i[3], "\n"
+                      "--------------------------------")
 
 
     def is_saved(self):
         """Check if there are some saved products in the database and put them in a list"""
+        self.fav_list.clear()
         self.my_db.commit()
         self.cursor.execute("SELECT * FROM Substitute")
         for i in self.cursor.fetchall():

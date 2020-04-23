@@ -16,6 +16,7 @@ def main():
 
             if choice == 1:
                 while True:
+                    print("\n---CATEGORIES---")
                     program.display_categories()
                     try:
                         program.cat_id = int(input("\nChoose a category : "))
@@ -28,6 +29,7 @@ def main():
                         print("\nUNAVAILABLE CHOICE!")
 
                 while True:
+                    print("\n---PRODUCTS---")
                     program.display_products()
                     try:
                         program.prod_id = int(input("\nChoose a product : "))

@@ -76,26 +76,27 @@ class Program:
 
 
     def display_product(self):
-        """Display the choosen product"""
+        """Display the chosen product"""
         self.cursor.execute("SELECT name, brand, nutriscore, store, url"
                             " FROM Product WHERE id ={}".format(self.prod_id))
         for i in self.cursor.fetchall():
-            print("Product name :", i[0] + "\n" + "Brand :", i[1] + "\n" + "Nutriscore :", i[2].upper() + "\n" +
+            print("\nProduct name :", i[0] + "\n" + "Brand :", i[1] + "\n" + "Nutriscore :", i[2].upper() + "\n" +
                   "Stores :", i[3] + "\n" + "Link to OpenFoodFacts :", i[4])
 
 
     def display_substitute(self):
-        """Display the choosen product's substitute"""
+        """Display the chosen product's substitute"""
         self.cursor.execute("SELECT name, brand, MIN(nutriscore), store, url, id FROM Product "
                             "WHERE cat_id ={}".format(self.cat_id))
         for i in self.cursor.fetchall():
-            print("Product name :", i[0] + "\n" + "Brand :", i[1] + "\n" + "Nutriscore :", i[2].upper() + "\n" +
+            print("\nCheck below for a healthier product :\n"
+                  "\nProduct name :", i[0] + "\n" + "Brand :", i[1] + "\n" + "Nutriscore :", i[2].upper() + "\n" +
                   "Stores :", i[3] + "\n" + "Link to OpenFoodFacts :", i[4])
             self.id = i[5]
 
 
     def save_substitute(self):
-        """Save the substitute's id and the choosen product's id in the database"""
+        """Save the substitute's id and the chosen product's id in the database"""
         self.cursor.execute("INSERT IGNORE INTO Substitute (sub_id, prod_id) "
                             "VALUES ({}, {})".format(self.id, self.prod_id))
         self.my_db.commit()
@@ -106,7 +107,7 @@ class Program:
 
 
     def display_saved(self):
-        """Display substitute and choosen product"""
+        """Display substitute and chosen product"""
         self.cursor.execute("SELECT Product1.name, Product1.url, Product2.name, Product2.url FROM SUBSTITUTE "
                             "INNER JOIN Product AS Product1 ON Substitute.sub_id = Product1.id "
                             "INNER JOIN Product AS Product2 ON Substitute.prod_id = Product2.id")

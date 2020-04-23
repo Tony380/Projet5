@@ -12,6 +12,7 @@ class Program:
         self.cat_id = int
         self.prod_id = int
         self.id = int
+        self.score = ""
         self.prod_list = []
         self.fav_list = {}
 
@@ -82,17 +83,21 @@ class Program:
         for i in self.cursor.fetchall():
             print("\nProduct name :", i[0] + "\n" + "Brand :", i[1] + "\n" + "Nutriscore :", i[2].upper() + "\n" +
                   "Stores :", i[3] + "\n" + "Link to OpenFoodFacts :", i[4])
+            self.score = i[2]
 
 
     def display_substitute(self):
         """Display the chosen product's substitute"""
-        self.cursor.execute("SELECT name, brand, MIN(nutriscore), store, url, id FROM Product "
-                            "WHERE cat_id ={}".format(self.cat_id))
+        self.cursor.execute("SELECT name, brand, nutriscore, store, url, id FROM Product "
+                            "WHERE cat_id ={} ORDER BY nutriscore LIMIT 1".format(self.cat_id))
         for i in self.cursor.fetchall():
-            print("\nCheck below for a healthier product :\n"
-                  "\nProduct name :", i[0] + "\n" + "Brand :", i[1] + "\n" + "Nutriscore :", i[2].upper() + "\n" +
-                  "Stores :", i[3] + "\n" + "Link to OpenFoodFacts :", i[4])
-            self.id = i[5]
+            if i[2] != self.score:
+                print("\nCheck below for a healthier product :\n"
+                      "\nProduct name :", i[0] + "\n" + "Brand :", i[1] + "\n" + "Nutriscore :", i[2].upper() + "\n" +
+                      "Stores :", i[3] + "\n" + "Link to OpenFoodFacts :", i[4])
+                self.id = i[5]
+            else:
+                print("\nThere is no better alternative")
 
 
     def save_substitute(self):

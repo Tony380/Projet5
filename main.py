@@ -78,4 +78,5 @@ def main():
             print("\nUNAVAILABLE CHOICE!")
 
 
-main()
+if __name__ == "__main__":
+    main()

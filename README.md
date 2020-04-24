@@ -8,7 +8,7 @@ Utilisez les données publiques de l'**OpenFoodFacts**
 ## Program's purpose
 This program use the **OpenFoodFacts API** to find a healthier substitute to a product.
 
-### User stories
+## User stories
 * As a user, i want a program which helps me to find healthier food.
     * I want to be able to select a category.
     * I want to have the list of products of the category.
@@ -18,11 +18,12 @@ This program use the **OpenFoodFacts API** to find a healthier substitute to a p
 * I want to be able to access my products and their substitutes.
 * I want to be able to leave the program.
 
-### Installation
+## Installation
 Before using this program :
 * Check requirements.txt and install the packages needed if it isn't already done.
 * Fill config.py if your data are not the same.
 
+## The program
 ### Main menu
 The main menu has three options:
 
@@ -46,7 +47,7 @@ The product is displayed on the screen with its healthier substitute.
 You have the possibility to save the product and its substitute.
 
 ### Menu 2 - Check my substitute products
-Saved products and their substitutes, are displayed on the screen.
+Saved products and their substitutes are displayed on the screen.
 
 ### Menu 0 - Quit the program
 You can quit the program.

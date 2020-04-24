@@ -18,7 +18,7 @@ This program use the **OpenFoodFacts API** to find a healthier substitute to a p
 * I want to be able to access my products and their substitutes.
 * I want to be able to leave the program.
 
-### Installation:
+### Installation
 Before using this program :
 * Check requirements.txt and install the packages needed if it isn't already done.
 * Fill config.py if your data are not the same.

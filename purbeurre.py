@@ -4,8 +4,8 @@ import requests
 import config
 
 
-class Program:
-    """Class Program directly connects to the database"""
+class Purbeurre:
+    """Class Purbeurre directly connects to the database"""
     def __init__(self):
         self.my_db = mysql.connector.connect(host=config.host, user=config.user, password=config.password)
         self.cursor = self.my_db.cursor()

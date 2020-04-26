@@ -1,4 +1,4 @@
-"""This file contains the Program class and its methods"""
+"""This file contains the Purbeurre class and its methods. This class represents our database 'Purbeurre'"""
 import mysql.connector
 import requests
 import config

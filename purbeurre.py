@@ -42,6 +42,7 @@ class Purbeurre:
                     result = res.json()
                     products = result["products"]
                     for i in products:
+                        # avoid products with missing data
                         if i.get("product_name", False) and i.get("brands", False) and \
                                 i.get("nutrition_grades", False) and i.get("stores", False):
                             product = (i['product_name'], i['brands'], i['nutrition_grades'],

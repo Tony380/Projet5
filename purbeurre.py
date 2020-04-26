@@ -12,7 +12,7 @@ class Purbeurre:
         self.cat_id = int
         self.prod_id = int
         self.id = int
-        self.score = ""
+        self.nutriscore = ""
         self.prod_list = []
         self.fav_list = {}
 
@@ -85,7 +85,7 @@ class Purbeurre:
             print("--------------------------------")
             print("Product name :", i[0] + "\n" + "Brand :", i[1] + "\n" + "Nutriscore :", i[2].upper() + "\n" +
                   "Stores :", i[3] + "\n" + "Link to OpenFoodFacts :", i[4])
-            self.score = i[2]
+            self.nutriscore = i[2]
             self.id = self.prod_id
 
 
@@ -95,7 +95,7 @@ class Purbeurre:
                             "nutriscore = (SELECT MIN(nutriscore) FROM Product WHERE cat_id = {}) "
                             "ORDER BY RAND() LIMIT 1".format(self.cat_id, self.cat_id))
         for i in self.cursor.fetchall():
-            if i[2] != self.score:
+            if i[2] != self.nutriscore:
                 print("\nThe following product is healthier :\n"
                       "\nProduct name :", i[0] + "\n" + "Brand :", i[1] + "\n" + "Nutriscore :", i[2].upper() + "\n" +
                       "Stores :", i[3] + "\n" + "Link to OpenFoodFacts :", i[4])

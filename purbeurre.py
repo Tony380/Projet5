@@ -11,7 +11,7 @@ class Purbeurre:
         self.cursor = self.my_db.cursor()
         self.cat_id = int
         self.prod_id = int
-        self.id = int
+        self.sub_id = int
         self.nutriscore = ""
         self.prod_list = []
         self.fav_list = {}
@@ -86,7 +86,7 @@ class Purbeurre:
             print("Product name :", i[0] + "\n" + "Brand :", i[1] + "\n" + "Nutriscore :", i[2].upper() + "\n" +
                   "Stores :", i[3] + "\n" + "Link to OpenFoodFacts :", i[4])
             self.nutriscore = i[2]
-            self.id = self.prod_id
+            self.sub_id = self.prod_id
 
 
     def display_substitute(self):
@@ -100,7 +100,7 @@ class Purbeurre:
                       "\nProduct name :", i[0] + "\n" + "Brand :", i[1] + "\n" + "Nutriscore :", i[2].upper() + "\n" +
                       "Stores :", i[3] + "\n" + "Link to OpenFoodFacts :", i[4])
                 print("--------------------------------")
-                self.id = i[5]
+                self.sub_id = i[5]
             else:
                 print("\nThere is no healthier alternative\n"
                       "--------------------------------")
@@ -109,7 +109,7 @@ class Purbeurre:
     def save_substitute(self):
         """Save the substitute's id and the chosen product's id in the database"""
         self.cursor.execute("INSERT IGNORE INTO Substitute (sub_id, prod_id) "
-                            "VALUES ({}, {})".format(self.id, self.prod_id))
+                            "VALUES ({}, {})".format(self.sub_id, self.prod_id))
         self.my_db.commit()
         self.cursor.execute("SELECT sub_id, prod_id FROM Substitute")
         for i in self.cursor.fetchall():

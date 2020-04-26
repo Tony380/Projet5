@@ -3,6 +3,7 @@ from purbeurre import Purbeurre
 
 
 def main():
+    # creating our database object
     purbeurre = Purbeurre()
     purbeurre.db_creation()
     purbeurre.db_fill()
@@ -20,6 +21,7 @@ def main():
                     purbeurre.display_categories()
                     try:
                         purbeurre.cat_id = int(input("\nChoose a category : "))
+                        # avoid user to type a category that doesn't exit
                         if 1 <= purbeurre.cat_id <= 10:
                             break
                         else:
@@ -33,6 +35,7 @@ def main():
                     purbeurre.display_products()
                     try:
                         purbeurre.prod_id = int(input("\nChoose a product : "))
+                        # avoid user to type a product that is not available in this category
                         if purbeurre.prod_id in purbeurre.prod_list:
                             break
                         else:

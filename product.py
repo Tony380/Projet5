@@ -2,11 +2,11 @@
 
 
 class Product:
-    def __init__(self):
-        self.id = ""
-        self.name = ""
-        self.brand = ""
-        self.nutriscore = ""
-        self.store = ""
-        self.cat_id = ""
-        self.url = ""
+    def __init__(self, id, name, brand, nutriscore, store, cat_id, url):
+        self.id = id
+        self.name = name
+        self.brand = brand
+        self.nutriscore = nutriscore
+        self.store = store
+        self.cat_id = cat_id
+        self.url = url

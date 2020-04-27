@@ -3,7 +3,7 @@ from purbeurre import Purbeurre
 
 
 class Category:
-    LIST = ["Muffins", "Steaks", "Biscuits", "Tortellini", "Viennoiseries",
+    NAME = ["Muffins", "Steaks", "Biscuits", "Tortellini", "Viennoiseries",
             "Taboulés", "Confitures", "Cassoulets", "Yaourts", "Sodas"]
 
     def __init__(self):
@@ -15,8 +15,8 @@ class Category:
         self.purbeurre.cursor.execute("USE purbeurre")
         self.purbeurre.cursor.execute("SELECT COUNT(id) FROM Category")
         for answer in self.purbeurre.cursor:
-            if answer[0] < len(self.LIST):
-                for element in self.LIST:
+            if answer[0] < len(self.NAME):
+                for element in self.NAME:
                     self.id += 1
                     self.purbeurre.cursor.execute("INSERT INTO Category (name) VALUES ('{}')".format(element))
         self.purbeurre.my_db.commit()

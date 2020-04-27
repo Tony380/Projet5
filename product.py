@@ -23,7 +23,7 @@ class Product:
         self.purbeurre.cursor.execute("SELECT COUNT(id) FROM Product")
         for answer in self.purbeurre.cursor:
             if answer[0] == 0:
-                for element in Category.LIST:
+                for element in Category.NAME:
                     payload = {"search_terms": "{}".format(element),
                                "page_size": 20,
                                "json": 1}

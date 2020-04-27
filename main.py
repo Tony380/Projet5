@@ -1,12 +1,17 @@
 """This is the main program file"""
 from purbeurre import Purbeurre
+from category import Category
+from product import Product
 
 
 def main():
     # creating our database object
     purbeurre = Purbeurre()
     purbeurre.db_creation()
-    purbeurre.db_fill()
+    cat = Category()
+    prod = Product()
+    cat.fill_cat()
+    prod.fill_prod()
     while True:
         try:
             print("\n---MENU PRINCIPAL---\n"

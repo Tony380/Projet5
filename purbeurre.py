@@ -2,8 +2,6 @@
 import mysql.connector
 import requests
 import config
-from category import Category
-from product import Product
 
 
 class Purbeurre:

@@ -2,8 +2,7 @@
 
 
 class Product:
-    def __init__(self, id, name, brand, nutriscore, store, cat_id, url):
-        self.id = id
+    def __init__(self, name, brand, nutriscore, store, cat_id, url):
         self.name = name
         self.brand = brand
         self.nutriscore = nutriscore

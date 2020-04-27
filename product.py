@@ -90,6 +90,3 @@ class Product:
         for i in self.purbeurre.cursor.fetchall():
             if i[0] not in self.purbeurre.fav_list:
                 self.purbeurre.fav_list[i[0]] = "{}".format(i[1])
-
-
-

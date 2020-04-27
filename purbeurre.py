@@ -52,4 +52,3 @@ class Purbeurre:
                       "Nom du produit : {}".format(i[2]), "\n"
                       "Lien vers OpenFoodFacts :", i[3], "\n"
                       "--------------------------------")
-

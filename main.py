@@ -23,11 +23,11 @@ def main():
             if choice == 1:
                 while True:
                     print("\n---CATÉGORIES---")
-                    purbeurre.display_categories()
+                    cat.display_categories()
                     try:
-                        purbeurre.cat_id = int(input("\nSélectionnez la catégorie : "))
+                        prod.cat_id = int(input("\nSélectionnez la catégorie : "))
                         # avoid user to type a category that doesn't exit
-                        if 1 <= purbeurre.cat_id <= 10:
+                        if 1 <= prod.cat_id <= 10:
                             break
                         else:
                             print("\nCHOIX INVALIDE!")
@@ -37,11 +37,11 @@ def main():
 
                 while True:
                     print("\n---PRODUITS---")
-                    purbeurre.display_products()
+                    prod.display_products()
                     try:
-                        purbeurre.prod_id = int(input("\nSélectionnez un aliment : "))
+                        prod.id = int(input("\nSélectionnez un aliment : "))
                         # avoid user to type a product that is not available in this category
-                        if purbeurre.prod_id in purbeurre.prod_list:
+                        if prod.id in prod.prod_list:
                             break
                         else:
                             print("\nCHOIX INVALIDE!")
@@ -50,14 +50,14 @@ def main():
 
                 while True:
                     try:
-                        purbeurre.display_product()
-                        purbeurre.display_substitute()
+                        prod.display_product()
+                        prod.display_substitute()
                         print("\n1 - Enregistrer\n"
                               "2 - Menu principal\n"
                               "0 - Quitter le programme\n")
                         choice = int(input("Entrez votre choix : "))
                         if choice == 1:
-                            purbeurre.save_substitute()
+                            prod.save_substitute()
                             break
                         elif choice == 2:
                             break

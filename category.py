@@ -1,4 +1,4 @@
-"""This file contains the class category. This class represents Category table in the database and fills it"""
+"""This class represents categories"""
 from purbeurre import Purbeurre
 
 

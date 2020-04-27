@@ -1,4 +1,4 @@
-"""This class contains the class Product. This class represents Product table in the database and fills it"""
+"""This class represents products"""
 import requests
 from purbeurre import Purbeurre
 from category import Category

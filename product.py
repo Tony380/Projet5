@@ -76,6 +76,7 @@ class Product:
                 print("\nIl n'y pas d'aliment plus sain disponible\n"
                       "--------------------------------")
 
+
     def save_substitute(self):
         """Save the substitute's id and the chosen product's id in the database"""
         self.purbeurre.cursor.execute("INSERT IGNORE INTO Substitute (sub_id, prod_id) "

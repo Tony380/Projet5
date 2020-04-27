@@ -2,28 +2,28 @@
 from purbeurre import Purbeurre
 
 
-class Category:
+class Category(Purbeurre):
     NAME = ["Muffins", "Steaks", "Biscuits", "Tortellini", "Viennoiseries",
             "Taboulés", "Confitures", "Cassoulets", "Yaourts", "Sodas"]
 
     def __init__(self):
+        super().__init__()
         self.id = 0
-        self.purbeurre = Purbeurre()
 
 
     def fill_cat(self):
-        self.purbeurre.cursor.execute("USE purbeurre")
-        self.purbeurre.cursor.execute("SELECT COUNT(id) FROM Category")
-        for answer in self.purbeurre.cursor:
+        self.cursor.execute("USE purbeurre")
+        self.cursor.execute("SELECT COUNT(id) FROM Category")
+        for answer in self.cursor:
             if answer[0] < len(self.NAME):
                 for element in self.NAME:
                     self.id += 1
-                    self.purbeurre.cursor.execute("INSERT INTO Category (name) VALUES ('{}')".format(element))
-        self.purbeurre.my_db.commit()
+                    self.cursor.execute("INSERT INTO Category (name) VALUES ('{}')".format(element))
+        self.my_db.commit()
 
 
     def display_categories(self):
         """Display the list of categories"""
-        self.purbeurre.cursor.execute("SELECT * FROM Category ORDER BY id")
-        for i in self.purbeurre.cursor.fetchall():
+        self.cursor.execute("SELECT * FROM Category ORDER BY id")
+        for i in self.cursor.fetchall():
             print(i[0], "-", i[1])

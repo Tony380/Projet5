@@ -96,13 +96,13 @@ class Purbeurre:
                             "ORDER BY RAND() LIMIT 1".format(self.cat_id, self.cat_id))
         for i in self.cursor.fetchall():
             if i[2] != self.nutriscore:
-                print("\nThe following product is healthier :\n"
+                print("\nL'aliment suivant est un substitut plus sain :\n"
                       "\nProduct name :", i[0] + "\n" + "Brand :", i[1] + "\n" + "Nutriscore :", i[2].upper() + "\n" +
                       "Stores :", i[3] + "\n" + "Link to OpenFoodFacts :", i[4])
                 print("--------------------------------")
                 self.sub_id = i[5]
             else:
-                print("\nThere is no healthier alternative\n"
+                print("\nIl n'y pas d'aliment plus sain disponible\n"
                       "--------------------------------")
 
 
@@ -124,16 +124,16 @@ class Purbeurre:
                             "INNER JOIN Product AS Product2 ON Substitute.prod_id = Product2.id")
         for i in self.cursor.fetchall():
             if i[1] == i[3]:
-                print("\nProduct name : {}".format(i[0]), "\n"
-                      "Link to OpenFoodFacts :", i[1], "\n"
-                      "There is no healthier alternative\n"
+                print("\nNom du produit : {}".format(i[0]), "\n"
+                      "Lien vers OpenFoodFacts :", i[1], "\n"
+                      "Il n'y pas d'aliment plus sain disponible\n"
                       "--------------------------------")
             else:
-                print("\nProduct name : {}".format(i[0]), "\n"
-                      "Link to OpenFoodFacts :", i[1], "\n"
-                      "Substitutes this product :\n"
-                      "Product name : {}".format(i[2]), "\n"
-                      "Link to OpenFoodFacts :", i[3], "\n"
+                print("\nNom du produit : {}".format(i[0]), "\n"
+                      "Lien vers OpenFoodFacts :", i[1], "\n"
+                      "Ce produit substitut le produit suivant :\n"
+                      "Nom du produit : {}".format(i[2]), "\n"
+                      "Lien vers OpenFoodFacts :", i[3], "\n"
                       "--------------------------------")
 
 

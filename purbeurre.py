@@ -48,7 +48,7 @@ class Purbeurre:
             else:
                 print("\nNom du produit : {}".format(i[0]), "\n"
                       "Lien vers OpenFoodFacts :", i[1], "\n"
-                      "Ce produit substitut le produit suivant :\n"
-                      "Nom du produit : {}".format(i[2]), "\n"
+                      "\nCe produit substitut le produit suivant :\n"
+                      "\nNom du produit : {}".format(i[2]), "\n"
                       "Lien vers OpenFoodFacts :", i[3], "\n"
                       "--------------------------------")

@@ -26,7 +26,7 @@ class Purbeurre:
         """Disconnection from the database"""
         self.cursor = self.cursor.close()
         self.my_db = self.my_db.close()
-        print("\nGOOD BYE !")
+        print("\nAU REVOIR !")
         quit()
 
 

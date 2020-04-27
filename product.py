@@ -42,7 +42,6 @@ class Product:
     def display_products(self):
         """Display the list of products"""
         self.prod_list.clear()
-        self.purbeurre.cursor.execute("USE purbeurre")
         self.purbeurre.cursor.execute("SELECT id, name FROM Product WHERE cat_id ='{}'".format(self.cat_id))
         for result in self.purbeurre.cursor.fetchall():
             print(result[0], "-", result[1])

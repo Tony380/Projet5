@@ -24,7 +24,6 @@ class Category:
 
     def display_categories(self):
         """Display the list of categories"""
-        self.purbeurre.cursor.execute("USE purbeurre")
         self.purbeurre.cursor.execute("SELECT * FROM Category ORDER BY id")
         for i in self.purbeurre.cursor.fetchall():
             print(i[0], "-", i[1])

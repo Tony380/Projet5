@@ -7,15 +7,11 @@ from category import Category
 class Product:
     def __init__(self):
         self.id = 0
-        self.name = "product_name"
-        self.brand = "brands"
-        self.nutriscore = "nutrition_grades"
-        self.store = "stores"
+        self.nutriscore = ""
         self.cat_id = 0
-        self.url = "url"
-        self.purbeurre = Purbeurre()
         self.prod_list = []
         self.sub_id = 0
+        self.purbeurre = Purbeurre()
 
 
     def fill_prod(self):
@@ -33,10 +29,10 @@ class Product:
                     self.cat_id += 1
                     for i in products:
                         # avoid products with missing data
-                        if i.get(self.name, False) and i.get(self.brand, False) and \
-                                i.get(self.nutriscore, False) and i.get(self.store, False):
-                            product = (i[self.name], i[self.brand], i[self.nutriscore],
-                                       i[self.store], self.cat_id, i[self.url])
+                        if i.get("product_name", False) and i.get("brands", False) and \
+                                i.get("nutrition_grades", False) and i.get("stores", False):
+                            product = (i["product_name"], i["brands"], i["nutrition_grades"],
+                                       i["stores"], self.cat_id, i["url"])
                             operation = "INSERT INTO Product (name, brand, nutriscore, store, cat_id, url)" \
                                         " VALUES (%s, %s, %s, %s, %s, %s) "
                             self.purbeurre.cursor.execute(operation, product)

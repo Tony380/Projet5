@@ -5,7 +5,7 @@ from product import Product
 
 
 def main():
-    # creating our database object
+    """Our main program starts"""
     purbeurre = Purbeurre()
     purbeurre.db_creation()
     cat = Category()

@@ -13,6 +13,7 @@ class Category(Purbeurre):
 
 
     def fill_cat(self):
+        """This method fills Category table in our database"""
         self.cursor.execute("USE purbeurre")
         self.cursor.execute("SELECT COUNT(id) FROM Category")
         for answer in self.cursor:
@@ -24,7 +25,7 @@ class Category(Purbeurre):
 
 
     def display_categories(self):
-        """Display the list of categories"""
+        """Displays the list of categories"""
         self.cursor.execute("SELECT * FROM Category ORDER BY id")
         for i in self.cursor.fetchall():
             print(i[0], "-", i[1])

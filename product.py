@@ -16,6 +16,7 @@ class Product(Purbeurre):
 
 
     def fill_prod(self):
+        """This method fills Product table in our database"""
         self.cursor.execute("USE purbeurre")
         self.cursor.execute("SELECT COUNT(id) FROM Product")
         for answer in self.cursor:
@@ -41,7 +42,7 @@ class Product(Purbeurre):
 
 
     def display_products(self):
-        """Display the list of products"""
+        """Displays the list of products"""
         self.prod_list.clear()
         self.cursor.execute("SELECT id, name FROM Product WHERE cat_id ='{}'".format(self.cat_id))
         for result in self.cursor.fetchall():
@@ -50,7 +51,7 @@ class Product(Purbeurre):
 
 
     def display_product(self):
-        """Display the chosen product"""
+        """Displays the chosen product"""
         self.cursor.execute("SELECT name, brand, nutriscore, store, url"
                             " FROM Product WHERE id ={}".format(self.id))
         for i in self.cursor.fetchall():
@@ -62,7 +63,7 @@ class Product(Purbeurre):
 
 
     def display_substitute(self):
-        """Display the chosen product's substitute"""
+        """Displays the chosen product's substitute"""
         self.cursor.execute("SELECT name, brand, nutriscore, store, url, id FROM Product WHERE cat_id = {} "
                             "AND nutriscore = (SELECT MIN(nutriscore) FROM Product WHERE cat_id = {}) "
                             "ORDER BY RAND() LIMIT 1".format(self.cat_id, self.cat_id))
@@ -79,7 +80,7 @@ class Product(Purbeurre):
 
 
     def save_substitute(self):
-        """Save the substitute's id and the chosen product's id in the database"""
+        """Saves the substitute's id and the chosen product's id in the database"""
         self.cursor.execute("INSERT IGNORE INTO Substitute (sub_id, prod_id) "
                             "VALUES ({}, {})".format(self.sub_id, self.id))
         self.my_db.commit()

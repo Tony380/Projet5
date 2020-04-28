@@ -12,7 +12,7 @@ class Purbeurre:
 
 
     def db_creation(self):
-        """Create the database"""
+        """Creates the database"""
         for line in open("database.sql").read().split(';\n'):
             self.cursor.execute(line)
 
@@ -26,7 +26,7 @@ class Purbeurre:
 
 
     def is_saved(self):
-        """Check if there are some saved products in the database and put them in a list"""
+        """Checks if there are some saved products in the database and put them in a list"""
         self.fav_list.clear()
         self.my_db.commit()
         self.cursor.execute("SELECT * FROM Substitute")
@@ -35,7 +35,7 @@ class Purbeurre:
 
 
     def display_saved(self):
-        """Display substitute and chosen product"""
+        """Displays substitute and chosen product"""
         self.cursor.execute("SELECT Product1.name, Product1.url, Product2.name, Product2.url FROM SUBSTITUTE "
                             "INNER JOIN Product AS Product1 ON Substitute.sub_id = Product1.id "
                             "INNER JOIN Product AS Product2 ON Substitute.prod_id = Product2.id")

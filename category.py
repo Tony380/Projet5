@@ -3,6 +3,7 @@ from purbeurre import Purbeurre
 
 
 class Category(Purbeurre):
+    """Inherits from Purbeurre"""
     NAME = ["Muffins", "Steaks", "Biscuits", "Tortellini", "Viennoiseries",
             "Taboulés", "Confitures", "Cassoulets", "Yaourts", "Sodas"]
 

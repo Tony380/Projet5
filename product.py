@@ -5,6 +5,7 @@ from category import Category
 
 
 class Product(Purbeurre):
+    """Inherits from Purbeurre"""
     def __init__(self):
         super().__init__()
         self.id = 0

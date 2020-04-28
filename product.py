@@ -23,7 +23,7 @@ class Product(Purbeurre):
             if answer[0] == 0:
                 for element in Category.NAME:
                     payload = {"search_terms": "{}".format(element),
-                               "page_size": 20,
+                               "page_size": 50,
                                "json": 1}
                     res = requests.get("https://fr.openfoodfacts.org/cgi/search.pl?", params=payload)
                     result = res.json()

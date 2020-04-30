@@ -19,7 +19,6 @@ class Category(Purbeurre):
         for answer in self.cursor:
             if answer[0] < len(self.NAME):
                 for element in self.NAME:
-                    self.id += 1
                     self.cursor.execute("INSERT INTO Category (name) VALUES ('{}')".format(element))
         self.my_db.commit()
 

@@ -84,7 +84,3 @@ class Product(Purbeurre):
         self.cursor.execute("INSERT IGNORE INTO Substitute (sub_id, prod_id) "
                             "VALUES ({}, {})".format(self.sub_id, self.id))
         self.my_db.commit()
-        self.cursor.execute("SELECT sub_id, prod_id FROM Substitute")
-        for i in self.cursor.fetchall():
-            if i[0] not in self.fav_list:
-                self.fav_list[i[0]] = "{}".format(i[1])

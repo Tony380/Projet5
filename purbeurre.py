@@ -10,12 +10,10 @@ class Purbeurre:
         self.cursor = self.my_db.cursor()
         self.fav_list = {}
 
-
     def db_creation(self):
         """Creates the database"""
         for line in open("database.sql").read().split(';\n'):
             self.cursor.execute(line)
-
 
     def disconnect(self):
         """Disconnection from the database"""
@@ -24,7 +22,6 @@ class Purbeurre:
         print("\nAU REVOIR !")
         quit()
 
-
     def is_saved(self):
         """Checks if there are some saved products in the database and put them in a list"""
         self.fav_list.clear()
@@ -32,7 +29,6 @@ class Purbeurre:
         self.cursor.execute("SELECT * FROM Substitute")
         for i in self.cursor.fetchall():
             self.fav_list[i[0]] = i[1]
-
 
     def display_saved(self):
         """Displays substitute and chosen product"""

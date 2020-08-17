@@ -11,7 +11,6 @@ class Category(Purbeurre):
         super().__init__()
         self.id = 0
 
-
     def fill_cat(self):
         """This method fills Category table in our database"""
         self.cursor.execute("USE purbeurre")
@@ -21,7 +20,6 @@ class Category(Purbeurre):
                 for element in self.NAME:
                     self.cursor.execute("INSERT INTO Category (name) VALUES ('{}')".format(element))
         self.my_db.commit()
-
 
     def display_categories(self):
         """Displays the list of categories"""

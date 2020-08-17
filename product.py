@@ -14,7 +14,6 @@ class Product(Purbeurre):
         self.prod_list = []
         self.sub_id = 0
 
-
     def fill_prod(self):
         """This method fills Product table in our database"""
         self.cursor.execute("USE purbeurre")
@@ -40,7 +39,6 @@ class Product(Purbeurre):
                             self.cursor.execute(operation, product)
         self.my_db.commit()
 
-
     def display_products(self):
         """Displays the list of products"""
         self.prod_list.clear()
@@ -48,7 +46,6 @@ class Product(Purbeurre):
         for result in self.cursor.fetchall():
             print(result[0], "-", result[1])
             self.prod_list.append(result[0])
-
 
     def display_product(self):
         """Displays the chosen product"""
@@ -60,7 +57,6 @@ class Product(Purbeurre):
                   "Stores :", i[3] + "\n" + "Link to OpenFoodFacts :", i[4])
             self.nutriscore = i[2]
             self.sub_id = self.id
-
 
     def display_substitute(self):
         """Displays the chosen product's substitute"""
@@ -77,7 +73,6 @@ class Product(Purbeurre):
             else:
                 print("\nIl n'y pas d'aliment plus sain disponible\n"
                       "--------------------------------")
-
 
     def save_substitute(self):
         """Saves the substitute's id and the chosen product's id in the database"""
